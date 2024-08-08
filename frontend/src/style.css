@@ -69,10 +69,10 @@ body {
   transition: transform 0.1s ease, background-color 0.1s ease;
 }
 #send:hover {
-  background-color: #273c75; /* Hover efekti için renk değişimi */
+  background-color: #273c75;
 }
 
 #send:active {
-  transform: scale(0.95); /* Buton tıklanırken küçülme efekti */
-  background-color: #40739e; /* Tıklama sırasında renk değişimi */
+  transform: scale(0.95);
+  background-color: #40739e;
 }
