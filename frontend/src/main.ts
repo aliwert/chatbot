@@ -95,3 +95,13 @@ const displayTypeIndicator = (): void => {
     }, 1000);
   }
 };
+//! Add event listener to submit button to trigger message sending
+sendBttn.addEventListener("click", sendUserMessage);
+
+//! Add event listener to allow sending messages with the "Enter" key
+inputField.addEventListener("keydown", (event: KeyboardEvent) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    sendUserMessage();
+  }
+});

@@ -13,12 +13,12 @@ body {
 }
 .container {
   max-width: 35rem;
-  margin: 1.2rem auto;
+  margin: 5rem auto;
   border: 2px solid white;
   border-radius: 0.8rem;
   overflow: hidden;
   box-shadow: 0 0.5rem 1rem (0, 0, 0, 0.1);
-  background-color: whitesmoke;
+  background-color: #192a565f;
 }
 .title {
   background-color: #192a56;
