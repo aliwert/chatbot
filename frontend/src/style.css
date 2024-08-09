@@ -6,9 +6,13 @@
 }
 body {
   font-family: "Platypi", serif;
+  background-image: url(./assets/chatbot-3589528_1920.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .container {
-  max-width: 25rem;
+  max-width: 35rem;
   margin: 1.2rem auto;
   border: 2px solid white;
   border-radius: 0.8rem;
@@ -31,7 +35,7 @@ body {
   width: fit-content;
 }
 .body {
-  height: 25rem;
+  height: 30rem;
   overflow-y: auto;
   padding: 2rem;
 }
