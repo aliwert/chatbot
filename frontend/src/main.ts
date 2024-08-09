@@ -4,13 +4,47 @@ const inputField = document.getElementById("user-input") as HTMLInputElement;
 const sendBttn = document.getElementById("send") as HTMLButtonElement;
 
 //! initialize variables to manage chatbot typing indicator and interval
-
 let isBotTyping = false;
 let typingInterval: ReturnType<typeof setInterval> | null = null;
 let typingMessage = "Typing";
 
-//! display the user message in chat
+//! to send the user's message and handle bot response
+async function sendUserMessage(): Promise<void> {
+  const message = inputField.value.trim();
+  if (message == "") {
+    return;
+  }
+  addUserMessage(message);
 
+  // clear the input field after sending the message
+  inputField.value = "";
+
+  try {
+    // show the typing indicator while waiting for the bot's response
+    displayTypeIndicator();
+
+    const response = await fetch("http://localhost:5173/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) {
+      console.log(response.status);
+      throw new Error("Failed to fetch response from the server");
+    }
+
+    const data = await response.json();
+    const botResponse = data.message as string;
+    addBotMessage(botResponse);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+//! display the user message in chat
 const addUserMessage = (message: string): void => {
   const userMsg = document.createElement("div");
   userMsg.className = "user-message";
