@@ -1,15 +1,15 @@
-// Get references to the DOM elements
+//! Get references to the DOM elements
 const chat = document.getElementById("body") as HTMLElement;
 const inputField = document.getElementById("user-input") as HTMLInputElement;
 const sendBttn = document.getElementById("send") as HTMLButtonElement;
 
-// initialize variables to manage chatbot typing indicator and interval
+//! initialize variables to manage chatbot typing indicator and interval
 
 let isBotTyping = false;
 let typingInterval: ReturnType<typeof setInterval> | null = null;
 let typingMessage = "Typing";
 
-// display the user message in chat
+//! display the user message in chat
 
 const addUserMessage = (message: string): void => {
   const userMsg = document.createElement("div");
@@ -21,7 +21,7 @@ const addUserMessage = (message: string): void => {
   chat.scrollTop = chat.scrollHeight;
 };
 
-// display the bot message in chat
+//! display the bot message in chat
 const addBotMessage = (message: string): void => {
   if (isBotTyping) {
     if (typingInterval) {
@@ -40,4 +40,24 @@ const addBotMessage = (message: string): void => {
   chatbotMessage.innerText = message;
   chat.appendChild(chatbotMessage);
   chat.scrollTop = chat.scrollHeight;
+};
+//! display a typing indicator for the bot
+const displayTypeIndicator = (): void => {
+  if (!isBotTyping) {
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "message type-indicator";
+    typingIndicator.innerText = typingMessage;
+    chat.appendChild(typingIndicator);
+    chat.scrollTop = chat.scrollHeight;
+    isBotTyping = true;
+    // update the typing indicator message periodically
+    typingInterval = setInterval(() => {
+      if (typingMessage == "Typing...") {
+        typingMessage = "Typing";
+      } else {
+        typingMessage += ".";
+      }
+      typingIndicator.innerText = typingMessage;
+    }, 1000);
+  }
 };
