@@ -5,15 +5,16 @@ const path = require("path");
 const { exec } = require("child_process");
 
 const app = express();
-require("dotenv").config();
+const PORT = 8000;
 
-const PORT = process.env.PORT || 8000;
-
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 const routes = require("./routes");
 app.use(routes);
+
+const errorHandler = require("../src/middlewares/errorHandler");
+app.use(errorHandler);
 
 app.use(express.static(path.join(__dirname, "..", "frontend")));
 
@@ -21,7 +22,7 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
 });
 
-app.listen(PORT, function () {
-  console.log(`Running: http://127.0.0.1:${PORT}/`);
-  exec(`open http://127.0.0.1:${PORT}/`);
+const server = app.listen(PORT, function () {
+  console.log(`Server running at http://localhost:5173/:${PORT}/`);
+  exec(`open http://localhost:5173/:${PORT}/`);
 });
